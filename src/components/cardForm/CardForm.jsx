@@ -8,7 +8,6 @@ const CardForm = () => {
   const [data, setData] = useState({
     name: "",
     email: "",
-    password: "",
     dob: "",
     bornInWeek: "",
     isBornInWeek: false,
@@ -16,6 +15,8 @@ const CardForm = () => {
     weightUnit: "",
     childHeight: "",
     heightUnit: "",
+    countryCode: "",
+    phoneNumber: "",
   });
 
   const [currentStep, setCurrentStep] = useState(1);
