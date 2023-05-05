@@ -6,11 +6,16 @@ import Step4 from "../step4/Step4";
 
 const CardForm = () => {
   const [data, setData] = useState({
-    first_name: "",
-    last_name: "",
+    name: "",
     email: "",
     password: "",
     dob: "",
+    bornInWeek: "",
+    isBornInWeek: false,
+    childWeight: "",
+    weightUnit: "",
+    childHeight: "",
+    heightUnit: "",
   });
 
   const [currentStep, setCurrentStep] = useState(1);

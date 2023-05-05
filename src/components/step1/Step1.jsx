@@ -1,28 +1,12 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
+import { useState } from "react";
 import * as Yup from "yup";
 
-// ! this is old one
-// const step1ValidationSchema = Yup.object().shape({
-//   first_name: Yup.string()
-//     .min(3, "Name must be at least 3 characters")
-//     .max(20, "Name must be at most 20 characters")
-//     .matches(/^[a-zA-Z ]*$/, "Only letters and spaces are allowed")
-//     .required("Name is required"),
-//   dob: Yup.date()
-//     .max(new Date(), "DOB cannot be a future date")
-//     .required("DOB is required"),
-//   // bornInWeek: Yup.number().when("isBornPrematurely", {
-//   //   is: true,
-//   //   then: Yup.number()
-//   //     .required("Born in week is required")
-//   //     .min(20, "Born in week must be at least 20 weeks")
-//   //     .max(36, "Born in week must be at most 36 weeks"),
-//   //   otherwise: Yup.number(),
-//   // }),
-// });
+const weightUnits = ["kg", "lbs"];
+const heightUnits = ["centimeters (cm)", "feet (ft) + inches (in)"];
 
 const step1ValidationSchema = Yup.object().shape({
-  first_name: Yup.string()
+  name: Yup.string()
     .min(3, "Name must be at least 3 characters long")
     .max(20, "Name must be at most 20 characters long")
     .matches(/^[^\s]+(\s+[^\s]+)*$/, "Name cannot contain only spaces")
@@ -30,24 +14,20 @@ const step1ValidationSchema = Yup.object().shape({
   dob: Yup.date()
     .max(new Date(), "DOB cannot be a future date")
     .required("DOB is required"),
-  bornInWeek: Yup.number().when("isBornInWeek", {
-    is: true,
-    then: Yup.number()
-      .required("Born in week is required")
-      .min(20, "Born in week must be at least 20")
-      .max(36, "Born in week must be at most 36"),
-  }),
-  isBornInWeek: Yup.boolean(),
-  childWeight: Yup.number().optional(),
-  childHeight: Yup.number().optional(),
-  email: Yup.string().email("Invalid email").required("Email is required"),
-  phone: Yup.string()
-    .matches(/^\+?\d{10,12}$/, "Invalid phone number")
-    .required("Phone is required"),
+  bornInWeek: Yup.number()
+    .min(20, "Must be greater than or equal to 20")
+    .max(36, "Must be less than or equal to 36")
+    .when("isBorn", {
+      is: true,
+      then: Yup.number().required("Required"),
+    }),
+  // isBorn: Yup.boolean(),
+  // childWeight: Yup.number().notRequired(),
+  // weightUnit: Yup.string().oneOf(weightUnits).notRequired(),
 });
 
 const Step1 = ({ data, onNext }) => {
-  // const [isBornPrematurely, setIsBornPrematurely] = useState(false);
+  const [fieldValue, setFieldValue] = useState("");
 
   // * here I will create submit button
   const handleSubmit = (values) => {
@@ -63,25 +43,20 @@ const Step1 = ({ data, onNext }) => {
         validationSchema={step1ValidationSchema}
         onSubmit={handleSubmit}
       >
-        {() => (
+        {({ values, errors, touched }) => (
           <Form>
             <div>
               <label htmlFor="name">Name</label>
               <Field
                 type="text"
-                id="first_name"
-                name="first_name"
+                id="name"
+                name="name"
                 // value={values.name}
                 // onChange={handleChange}
                 // onBlur={handleBlur}
               />
-              <ErrorMessage
-                name="first_name"
-                component="div"
-                className="error"
-              />
+              <ErrorMessage name="name" component="div" className="error" />
             </div>
-
             <div>
               <label htmlFor="dob">DOB</label>
               <Field
@@ -89,10 +64,71 @@ const Step1 = ({ data, onNext }) => {
                 id="dob"
                 name="dob"
                 // value={values.dob}
-                // onChange={handleChange}
+
                 // onBlur={handleBlur}
               />
               <ErrorMessage name="dob" component="div" className="error" />
+            </div>
+            {/* CODE FOR RADIO CONDITION */}
+
+            <div>
+              <label>
+                <Field type="checkbox" name="isBornInWeek" />
+                Born in week?
+              </label>
+              {errors.isBornInWeek && touched.isBornInWeek && (
+                <div>{errors.isBornInWeek}</div>
+              )}
+            </div>
+            {values.isBornInWeek && (
+              <div>
+                <label>
+                  Born in week:
+                  <Field type="number" name="bornInWeek" />
+                </label>
+                {errors.bornInWeek && touched.bornInWeek && (
+                  <div>{errors.bornInWeek}</div>
+                )}
+              </div>
+            )}
+
+            {/*  CHILD AND ITS WEIGHT CATEGORY */}
+            <label htmlFor="childWeight">Child Weight</label>
+            <div>
+              <Field id="childWeight" name="childWeight" type="number" />
+              <ErrorMessage name="childWeight" />
+            </div>
+            <label htmlFor="weightUnit">Weight Unit</label>
+            <div>
+              <Field as="select" id="weightUnit" name="weightUnit">
+                <option value="">-- Select Weight Unit --</option>
+                {weightUnits.map((unit) => (
+                  <option key={unit} value={unit}>
+                    {unit}
+                  </option>
+                ))}
+              </Field>
+              <ErrorMessage name="weightUnit fill correctly" />
+            </div>
+
+            {/* here I will create Child Height */}
+            <label htmlFor="childWeight">Child Height</label>
+            <div>
+              <Field id="childHeight" name="childHeight" type="number" />
+              <ErrorMessage name="childWeight" />
+            </div>
+
+            <label htmlFor="heightUnit">Height Unit</label>
+            <div>
+              <Field as="select" id="heightUnit" name="heightUnit">
+                <option value="">-- Select Height Unit --</option>
+                {heightUnits.map((unit) => (
+                  <option key={unit} value={unit}>
+                    {unit}
+                  </option>
+                ))}
+              </Field>
+              <ErrorMessage name="heightUnit" />
             </div>
 
             <button type="submit">Next</button>
