@@ -6,7 +6,7 @@ import "./step1.scss";
 
 console.log("this is my list for all the countries");
 
-const weightUnits = ["-- Select Weight Unit --", "kg", "lbs"];
+const weightUnits = ["kg", "lbs"];
 const heightUnits = ["centimeters (cm)", "feet (ft) + inches (in)"];
 
 const step1ValidationSchema = Yup.object().shape({
@@ -153,11 +153,12 @@ const Step1 = ({ data, onNext }) => {
                 <div className="child-container">
                   <div className="child-weight-sub-class">
                     <div className="weight-headline">
-                      <label htmlFor="childWeight">Child Weight :</label>
+                      <label htmlFor="childWeight">Child Weight</label>
                     </div>
                     <div className="weight-input">
                       <Field
                         id="childWeight"
+                        placeholder="3"
                         name="childWeight"
                         type="number"
                       />
@@ -170,71 +171,112 @@ const Step1 = ({ data, onNext }) => {
                       <label htmlFor="weightUnit">Weight Unit</label>
                     </div>
                     <div className="weight-input">
+                      {/* <div className="weight-units"> */}
                       <Field as="select" id="weightUnit" name="weightUnit">
                         <option value="">-- Select Weight Unit --</option>
-                        <div weight-unit-input>
-                          {weightUnits.map((unit) => (
-                            <option key={unit} value={unit}>
-                              {unit}
-                            </option>
-                          ))}
-                        </div>
+
+                        {weightUnits.map((unit) => (
+                          <option key={unit} value={unit}>
+                            {unit}
+                          </option>
+                        ))}
                       </Field>
+                      {/* </div> */}
                       <ErrorMessage name="weightUnit fill correctly" />
                     </div>
                   </div>
                 </div>
 
                 {/* here I will create Child Height */}
-                <label htmlFor="childWeight">Child Height</label>
-                <div>
-                  <Field id="childHeight" name="childHeight" type="number" />
-                  <ErrorMessage name="childWeight" />
-                </div>
-
-                <label htmlFor="heightUnit">Height Unit</label>
-                <div>
-                  <Field as="select" id="heightUnit" name="heightUnit">
-                    <option value="">-- Select Height Unit --</option>
-                    {heightUnits.map((unit) => (
-                      <option key={unit} value={unit}>
-                        {unit}
-                      </option>
-                    ))}
-                  </Field>
-                  <ErrorMessage name="heightUnit" />
+                <div className="height-container">
+                  <div className="height-sub-container">
+                    <div className="height-headline">
+                      <label htmlFor="childWeight">Child Height</label>
+                    </div>
+                    <div className="height-input">
+                      <Field
+                        id="childHeight"
+                        placeholder="1`2``"
+                        name="childHeight"
+                        type="number"
+                      />
+                      <ErrorMessage name="childWeight" />
+                    </div>
+                  </div>
+                  <div className="height-sub-container">
+                    <div className="height-headline">
+                      <label htmlFor="heightUnit">Height Unit</label>
+                    </div>
+                    <div className="height-input">
+                      <Field as="select" id="heightUnit" name="heightUnit">
+                        <option value="">-- Select Height Unit --</option>
+                        {heightUnits.map((unit) => (
+                          <option key={unit} value={unit}>
+                            {unit}
+                          </option>
+                        ))}
+                      </Field>
+                      <ErrorMessage name="heightUnit" />
+                    </div>
+                  </div>
                 </div>
 
                 {/* EMAIL SECTION  */}
-                <div>
-                  <label htmlFor="email">Email</label>
-                  <Field type="email" name="email" />
-                  <ErrorMessage name="email" />
+                <div className="email-container">
+                  <span className="email-label">
+                    <label htmlFor="email">Email</label>
+                  </span>
+                  <Field
+                    type="email"
+                    placeholder="james@gmail.com"
+                    name="email"
+                    className="email-field"
+                  />
+                  <div className="error">
+                    <ErrorMessage name="email" />
+                  </div>
                 </div>
 
                 {/* PHONE NUMBER SECTION */}
 
-                <div>
-                  <label htmlFor="countryCode">Country Code</label>
-                  <Field name="countryCode" as="select">
-                    <option value="">---Select country code---</option>
-                    {allCountryOptions.map((country) => {
-                      return (
-                        <option value={country.label} key={country.value}>
-                          {`${country.label} ( ${country.value} ) `}
-                        </option>
-                      );
-                    })}
-                  </Field>
-                  <ErrorMessage name="countryCode" />
+                <div className="phone-container">
+                  <div className="phone-sub-container">
+                    <div className="phone-headline">
+                      <label htmlFor="countryCode">Country Code</label>
+                    </div>
+                    <div className="phone-input">
+                      <Field name="countryCode" as="select">
+                        <option value="">--Select Country--</option>
+                        {allCountryOptions.map((country) => {
+                          return (
+                            <option value={country.label} key={country.value}>
+                              {`${country.label} ( ${country.value} ) `}
+                            </option>
+                          );
+                        })}
+                      </Field>
+                      <ErrorMessage name="countryCode" />
+                    </div>
+                  </div>
+                  <div className="phone-sub-container-2">
+                    <div className="phone-input ">
+                      <Field
+                        type="tel"
+                        name="phoneNumber"
+                        // className="phone-input"
+                      />
+                    </div>
+                  </div>
                 </div>
-                <div>
-                  <label htmlFor="phoneNumber">Phone Number</label>
-                  <Field type="tel" name="phoneNumber" />
+                <div className="phone-error error">
                   <ErrorMessage name="phoneNumber" />
                 </div>
 
-                <button type="submit">Next</button>
+                <div className="button-container">
+                  <button type="submit" className="btn">
+                    Next
+                  </button>
+                </div>
               </Form>
             )}
           </Formik>

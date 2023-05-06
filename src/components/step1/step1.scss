@@ -5,26 +5,32 @@
   align-items: center;
   justify-content: center;
   display: flex;
+  .error {
+    color: red;
+    font-size: 12px;
+  }
 
   .inner-container {
-    max-width: 695.43px;
+    // max-width: 695.43px;
+    width: 490px;
     border-radius: 5px;
     // height: 1390.86px;
-    border: 1px solid black;
+    // border: 1px solid black;
+    border-radius: 16px;
     background: #ffffff;
     // background-color: red;
-    .error {
-      color: red;
-      font-size: 12px;
-    }
 
     .sub-container {
       width: 80%;
       margin: auto;
+      margin-top: 30px;
+      margin-bottom: 30px;
 
       .back-btn-container {
-        margin-top: 12px;
+        margin-top: 27px;
         color: #000000;
+        cursor: pointer;
+
         .back-btn-arrow {
           padding-right: 7px;
         }
@@ -53,7 +59,7 @@
 
       .text-desc {
         > h4 {
-          font-size: 28px;
+          font-size: 23px;
           margin: 10px 0;
           color: #1b1b1b;
         }
@@ -64,13 +70,16 @@
         flex-direction: column;
 
         .name-label {
-          font-size: 12px;
-          margin-bottom: 4px;
+          font-size: 16px;
+          margin-top: 5px;
+          margin-bottom: 5px;
           color: #424242;
         }
         .name-field {
-          padding: 5px;
-          margin-bottom: 6px;
+          padding: 7px;
+          margin-top: 5px;
+          margin-bottom: 5px;
+          border-radius: 5px;
         }
       }
       .dob-container {
@@ -78,13 +87,14 @@
         flex-direction: column;
 
         .dob-label {
-          font-size: 12px;
-          margin-bottom: 4px;
+          font-size: 16px;
+          margin-bottom: 5px;
           color: #424242;
         }
         .dob-field {
-          padding: 5px;
+          padding: 6px;
           margin-bottom: 5px;
+          border-radius: 6px;
         }
       }
 
@@ -92,7 +102,8 @@
         display: flex;
         flex-direction: column;
         .radio-name {
-          font-size: 12px;
+          margin-top: 5px;
+          font-size: 16px;
           margin-bottom: 5px;
           color: #424242;
         }
@@ -108,16 +119,19 @@
         // font-size: 2px;
 
         .born-label {
-          font-size: 12px;
+          margin-top: 5px;
+          font-size: 16px;
           color: #424242;
           margin-bottom: 6px;
         }
 
         .born-field {
           input[type="number"] {
-            width: 98%;
-            padding: 5px;
+            width: 97%;
+            padding: 6px;
+            margin-right: 5px;
             margin-bottom: 5px;
+            border-radius: 6px;
           }
         }
       }
@@ -125,60 +139,174 @@
       .child-container {
         display: flex;
         flex-direction: row;
+        width: 100%;
+        justify-content: space-between;
+
         .child-weight-sub-class {
-          width: 50%;
+          width: 100%;
 
           .weight-headline {
             width: 100%;
+            display: flex;
+            justify-content: center;
             align-items: center;
             margin-top: 10px;
-            margin-left: 55px;
-            font-size: 12px;
-            margin-bottom: 2px;
+
+            font-size: 16px;
+            margin-bottom: 4px;
             color: #424242;
           }
+          .weight-input select {
+            width: 100%;
+            padding: 6px;
+            border-radius: 6px;
+          }
+
           .weight-input {
             input[type="number"] {
-              width: 80%;
-              padding: 5px;
+              width: 90%;
+              padding: 6px;
+              border-radius: 6px;
             }
           }
         }
       }
+      // * height container
 
-      // > p {
-      //   padding-left: 55.32px;
-      //   //   width: 55.32px;
-      //   background-color: blue;
-      //   height: 16.4px;
-      // }
-      // .current-step {
-      //   max-width: 80%;
-      //   display: grid;
-      //   grid-template-columns: repeat(4, 1fr);
-      //   grid-gap: 10px;
-      //   width: grid(4fr);
-      //   margin: auto;
+      .height-container {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        justify-content: space-between;
+        margin-top: 5px;
+        margin-bottom: 10px;
 
-      //   :nth-child(1) {
-      //     background-color: #7c55c5 !important;
-      //   }
-      //   .item {
-      //     height: 11px;
-      //     background-color: #f2f2f2;
-      //     border-radius: 20px;
-      //     // border: solid 1px black;
-      //     // margin-bottom: 3px;
-      //   }
-      // }
-      // .text-data {
-      //   max-width: 80%;
-      //   margin: auto;
-      //   > p {
-      //     font-size: 25px;
-      //     color: #1b1b1b;
-      // }
-      // }
+        .height-sub-container {
+          width: 100%;
+
+          .height-headline {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 10px;
+            font-size: 16px;
+            margin-bottom: 4px;
+            color: #424242;
+          }
+
+          .height-input select {
+            width: 100%;
+            padding: 6px;
+            border-radius: 6px;
+          }
+
+          .height-input {
+            input[type="number"] {
+              width: 90%;
+              padding: 6px;
+              border-radius: 6px;
+            }
+          }
+        }
+      }
+      // * email container
+
+      .email-container {
+        display: flex;
+        flex-direction: column;
+
+        .email-label {
+          font-size: 16px;
+          margin-bottom: 5px;
+          color: #424242;
+        }
+        .email-field {
+          padding: 6px;
+          margin-bottom: 5px;
+          border-radius: 6px;
+        }
+      }
+
+      //* phone number
+
+      .phone-container {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        justify-content: space-between;
+        margin-top: 5px;
+        // margin-bottom: 10px;
+
+        .phone-sub-container {
+          width: 30%;
+
+          .phone-headline {
+            // width: 100%;
+            // display: flex;
+            // justify-content: center;
+            // align-items: center;
+            margin-top: 10px;
+            font-size: 16px;
+            margin-bottom: 4px;
+            color: #424242;
+          }
+
+          .phone-input select {
+            width: 85%;
+            padding: 5.5px;
+            border-radius: 6px;
+          }
+
+          // .phone-input {
+          //   input[type="number"] {
+          //     width: 90%;
+          //     padding: 5px;
+          //     border-radius: 6px;
+          //   }
+          // }
+        }
+        .phone-sub-container-2 {
+          display: flex;
+          width: 70%;
+          flex-direction: column;
+          justify-content: flex-end;
+
+          .phone-input {
+            input[type="tel"] {
+              width: 97%;
+              padding: 6px;
+              border-radius: 6px;
+            }
+          }
+        }
+      }
+      // * phone error
+      .phone-error {
+        text-align: center;
+        margin-bottom: 10px;
+      }
+
+      // * button Container
+
+      .button-container {
+        width: 100%;
+        margin-top: 5px;
+        margin-bottom: 40px;
+        margin-top: 30px;
+
+        .btn {
+          background: #7c55c5;
+          width: 100%;
+          padding: 6px;
+          color: #ffffff;
+          font-size: 20px;
+          border: none;
+          border-radius: 6px;
+        }
+      }
+
+      // ! end remove this
     }
   }
 }
